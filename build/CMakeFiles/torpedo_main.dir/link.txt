@@ -1,0 +1,1 @@
+/usr/bin/arm-linux-gnueabihf-gcc -g CMakeFiles/torpedo_main.dir/src/main.c.o CMakeFiles/torpedo_main.dir/src/common_Control/actuators.c.o CMakeFiles/torpedo_main.dir/src/common_Control/control.c.o CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o -o torpedo_main  -lpthread 

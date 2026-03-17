@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/pi/Torpedo_EX60/build",
+  "command": "/usr/bin/arm-linux-gnueabihf-gcc  -I/home/pi/Torpedo_EX60/lib/c_library_v2 -I/home/pi/Torpedo_EX60/src -g -Wall -Wextra -std=gnu11 -o CMakeFiles/torpedo_main.dir/src/main.c.o -c /home/pi/Torpedo_EX60/src/main.c",
+  "file": "/home/pi/Torpedo_EX60/src/main.c"
+},
+{
+  "directory": "/home/pi/Torpedo_EX60/build",
+  "command": "/usr/bin/arm-linux-gnueabihf-gcc  -I/home/pi/Torpedo_EX60/lib/c_library_v2 -I/home/pi/Torpedo_EX60/src -g -Wall -Wextra -std=gnu11 -o CMakeFiles/torpedo_main.dir/src/common_Control/actuators.c.o -c /home/pi/Torpedo_EX60/src/common_Control/actuators.c",
+  "file": "/home/pi/Torpedo_EX60/src/common_Control/actuators.c"
+},
+{
+  "directory": "/home/pi/Torpedo_EX60/build",
+  "command": "/usr/bin/arm-linux-gnueabihf-gcc  -I/home/pi/Torpedo_EX60/lib/c_library_v2 -I/home/pi/Torpedo_EX60/src -g -Wall -Wextra -std=gnu11 -o CMakeFiles/torpedo_main.dir/src/common_Control/control.c.o -c /home/pi/Torpedo_EX60/src/common_Control/control.c",
+  "file": "/home/pi/Torpedo_EX60/src/common_Control/control.c"
+},
+{
+  "directory": "/home/pi/Torpedo_EX60/build",
+  "command": "/usr/bin/arm-linux-gnueabihf-gcc  -I/home/pi/Torpedo_EX60/lib/c_library_v2 -I/home/pi/Torpedo_EX60/src -g -Wall -Wextra -std=gnu11 -o CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o -c /home/pi/Torpedo_EX60/src/Debug/logger.c",
+  "file": "/home/pi/Torpedo_EX60/src/Debug/logger.c"
+}
+]

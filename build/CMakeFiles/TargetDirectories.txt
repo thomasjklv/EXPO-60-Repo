@@ -1,0 +1,3 @@
+/home/pi/Torpedo_EX60/build/CMakeFiles/rebuild_cache.dir
+/home/pi/Torpedo_EX60/build/CMakeFiles/edit_cache.dir
+/home/pi/Torpedo_EX60/build/CMakeFiles/torpedo_main.dir
