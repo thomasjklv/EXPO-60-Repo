@@ -61,30 +61,33 @@
 #include "common_Control/control.h"
 #include "common_Control/vector3.h"
 #include "Debug/logger.h"
+
 // Define this script only Defines Ex: #define value true
 /*=========== Script Defines ===========*/
 #define LISTEN_PORT 14670
 
-#pragma endregion
-
 /*=========== DRONE CONTROL ===========*/
 volatile drone_MAIN TOP_DRONE = {.ARMED = 0};
 
+
+#pragma region Actuators
 /*=============== SERVOS ==============*/
-srvSTR SERVO_TEST = {    
+extern srvSTR SERVO_TEST = {    
     .MAX_ANGLE = 90,
     .MIN_ANGLE = 0,
     .DFLT_ANGLE = 45,
     .ANGLE = 90,
     .CHANNEL = 8
 };
+#pragma endregion
+
 
 void EXIT_TASK(int sig)
 {
     printf("\nEXIT\n");
     disarmDrone();
     logger_close();
-    exit(1);
+    exit(sig);
 }
 
 
@@ -104,12 +107,26 @@ void* thread_1_Telemetry(void* arg)
 
         TOP_DRONE.gyro_RAD = get_GYRO_V3();
         TOP_DRONE.comps_RAD = get_COMPS_V3();
+        TOP_DRONE.compsYAW = get_YAW_HEADING();
+        TOP_DRONE.compsPITCH = get_PITCH_HEADING();
+
         TOP_DRONE.gps = get_GPS();
 
         double t = get_time_s();
 
-        logger_write(t, get_YAW_HEADING(),get_PITCH_HEADING(),
-        TOP_DRONE.gyro_RAD.x, TOP_DRONE.gyro_RAD.y, TOP_DRONE.gyro_RAD.z);
+        logger_begin_row();
+        logger_add_double("Tijd", t);
+        logger_add_float("Yaw_deg", TOP_DRONE.compsYAW);
+        logger_add_float("Pitch_deg", TOP_DRONE.compsPITCH);
+
+        logger_add_float("Gyro_X", TOP_DRONE.gyro_RAD.x);
+        logger_add_float("Gyro_Y", TOP_DRONE.gyro_RAD.y);
+        logger_add_float("Gyro_Z", TOP_DRONE.gyro_RAD.z);
+
+        logger_add_float("Compass_X", TOP_DRONE.comps_RAD.x);
+        logger_add_float("Compass_Y", TOP_DRONE.comps_RAD.y);
+        logger_add_float("Compass_Z", TOP_DRONE.comps_RAD.z);
+        logger_end_row();
 
 
         if (sPrintTelemetry){
@@ -149,6 +166,9 @@ int main(void)
         printf("WARNING: DRONE WILL AUTO ARM IN 5s...\n");
         sleep(5);
         armDrone(); TOP_DRONE.ARMED = true; printf("DRONE ARMED\n");
+         logger_begin_row();
+         logger_add_string("ARMSTATUS","ARMED");
+         logger_end_row();
     }
     
     pthread_t t1, t2;

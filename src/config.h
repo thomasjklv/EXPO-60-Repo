@@ -3,8 +3,11 @@
 
 /* ===== DEBUG ===== */
 #define LOG_FOLDER "../src/logs/"
-#define LOG_FLUSH_INTERVAL 1
 #define LOG_RATE_HZ 10
+#define LOG_AUTO_FLUSH 1
+#define LOGGER_MAX_COLUMNS 32
+#define LOGGER_MAX_NAME_LEN 64
+#define LOGGER_MAX_VALUE_LEN 64
 /*==================*/
 
 

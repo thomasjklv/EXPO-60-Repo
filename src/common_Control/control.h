@@ -9,6 +9,8 @@ typedef struct
     bool ARMED;
     vector3 gyro_RAD;
     vector3 comps_RAD;
+    float compsYAW;
+    float compsPITCH;
     gpsSTR gps;
 } drone_MAIN;
 
