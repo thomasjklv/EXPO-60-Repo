@@ -49,6 +49,7 @@
 #include <pthread.h>
 #include <math.h>
 #include <signal.h>
+#include <time.h>
 #include "common/mavlink.h"
 
 // Include the config file here
@@ -70,7 +71,7 @@
 volatile drone_MAIN TOP_DRONE = {.ARMED = 0};
 
 
-#pragma region Actuators
+#pragma region actuator list
 /*=============== SERVOS ==============*/
 extern srvSTR SERVO_TEST = {    
     .MAX_ANGLE = 90,
@@ -99,6 +100,7 @@ double get_time_s()
     return ts.tv_sec + ts.tv_nsec * 1e-9;
 }
 
+#pragma region Telemetry Thread
 // MAIN TELEMETRY THREAD: This Thread is made for reading and setting Telemetry Values
 void* thread_1_Telemetry(void* arg)
 {
@@ -109,38 +111,46 @@ void* thread_1_Telemetry(void* arg)
         TOP_DRONE.comps_RAD = get_COMPS_V3();
         TOP_DRONE.compsYAW = get_YAW_HEADING();
         TOP_DRONE.compsPITCH = get_PITCH_HEADING();
+        TOP_DRONE.accel_V3 = get_ACCEL_V3();
 
         TOP_DRONE.gps = get_GPS();
 
         double t = get_time_s();
 
         logger_begin_row();
-        logger_add_double("Tijd", t);
-        logger_add_float("Yaw_deg", TOP_DRONE.compsYAW);
-        logger_add_float("Pitch_deg", TOP_DRONE.compsPITCH);
+        logger_set_double("Tijd", t);
+        logger_set_float("Yaw_deg", TOP_DRONE.compsYAW);
+        logger_set_float("Pitch_deg", TOP_DRONE.compsPITCH);
 
-        logger_add_float("Gyro_X", TOP_DRONE.gyro_RAD.x);
-        logger_add_float("Gyro_Y", TOP_DRONE.gyro_RAD.y);
-        logger_add_float("Gyro_Z", TOP_DRONE.gyro_RAD.z);
+        logger_set_float("Gyro_X", TOP_DRONE.gyro_RAD.x);
+        logger_set_float("Gyro_Y", TOP_DRONE.gyro_RAD.y);
+        logger_set_float("Gyro_Z", TOP_DRONE.gyro_RAD.z);
 
-        logger_add_float("Compass_X", TOP_DRONE.comps_RAD.x);
-        logger_add_float("Compass_Y", TOP_DRONE.comps_RAD.y);
-        logger_add_float("Compass_Z", TOP_DRONE.comps_RAD.z);
+        logger_set_float("Compass_X", TOP_DRONE.comps_RAD.x);
+        logger_set_float("Compass_Y", TOP_DRONE.comps_RAD.y);
+        logger_set_float("Compass_Z", TOP_DRONE.comps_RAD.z);
+
+         logger_set_float("Accel_X", TOP_DRONE.accel_V3.x);
+        logger_set_float("Accel_Y", TOP_DRONE.accel_V3.y);
+        logger_set_float("Accel_Z", TOP_DRONE.accel_V3.z);
         logger_end_row();
 
 
         if (sPrintTelemetry){
-        printf("\rYaw:%6.2f deg  Pitch:%6.2f deg  |  Gyro X:%6.3f Y:%6.3f Z:%6.3f  |  GPS: %.6f %.6f Alt: %.2f m   ",
-               get_YAW_HEADING(),
-               get_PITCH_HEADING(),
-               TOP_DRONE.gyro_RAD.x, TOP_DRONE.gyro_RAD.y, TOP_DRONE.gyro_RAD.z,
-               TOP_DRONE.gps.lat_deg, TOP_DRONE.gps.lon_deg, TOP_DRONE.gps.alt_m);
+        printf("\rYaw:%6.2f deg  Pitch:%6.2f deg  |  Gyro X:%6.3f Y:%6.3f Z:%6.3f  |  Accel X:%6.2f  Accel Y:%6.2f  Accel Z:%6.2f",
+       get_YAW_HEADING(),
+       get_PITCH_HEADING(),
+       TOP_DRONE.gyro_RAD.x, TOP_DRONE.gyro_RAD.y, TOP_DRONE.gyro_RAD.z,
+       TOP_DRONE.accel_V3.x, TOP_DRONE.accel_V3.y, TOP_DRONE.accel_V3.z
+);
         fflush(stdout);
         }
     }
     return NULL;
 }
+#pragma endregion
 
+#pragma region Control Thread
 // MAIN CONTROL THREAD: This Thread is made for controlling the drones actuators
 void* thread_2_Control(void* arg)
 {
@@ -153,9 +163,9 @@ void* thread_2_Control(void* arg)
     }
     return NULL;
 }
+#pragma endregion
 
-
-
+#pragma region Main
 int main(void)
 {
     logger_init();
@@ -166,9 +176,10 @@ int main(void)
         printf("WARNING: DRONE WILL AUTO ARM IN 5s...\n");
         sleep(5);
         armDrone(); TOP_DRONE.ARMED = true; printf("DRONE ARMED\n");
-         //logger_begin_row();
-         //logger_add_string("ARMSTATUS","ARMED");
-         //logger_end_row();
+         logger_begin_row();
+         logger_set_double("Tijd", get_time_s());
+         logger_set_string("ARMSTATUS","ARMED");
+         logger_end_row();
     }
     
     pthread_t t1, t2;
@@ -180,3 +191,4 @@ int main(void)
     pthread_join(t2, NULL);
     return 0;
 }
+#pragma endregion

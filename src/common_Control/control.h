@@ -9,6 +9,7 @@ typedef struct
     bool ARMED;
     vector3 gyro_RAD;
     vector3 comps_RAD;
+    vector3 accel_V3;
     float compsYAW;
     float compsPITCH;
     gpsSTR gps;
@@ -25,6 +26,9 @@ vector3 get_GYRO_V3(void);
 vector3 get_COMPS_V3(void);
 float get_YAW_HEADING(void);
 float get_PITCH_HEADING(void);
+
+/* ================= Accel ================= */
+vector3 get_ACCEL_V3(void);
 
 /* ================= CONVERSIONS ================= */
 float rad_to_deg(float rad);    

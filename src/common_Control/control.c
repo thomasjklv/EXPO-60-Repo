@@ -1,5 +1,7 @@
 #include "common_Control/control.h"
 #include "config.h"
+
+#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
@@ -20,9 +22,10 @@ static float roll_rad  = 0.0f;
 static float pitch_rad = 0.0f;
 static float yaw_rad   = 0.0f;
 
-static vector3 gyro = {0};
+static vector3 gyro  = {0};
+static vector3 accel = {0};
 static vector3 comps = {0};
-static gpsSTR gps = {0};
+static gpsSTR gps    = {0};
 
 static void init_socket(void)
 {
@@ -88,27 +91,31 @@ static void update_mavlink(void)
                 gps.alt_m   = ((float)pos.relative_alt) / 1000.0f;
             }
 
-            /* ================= COMPASS ================= */
+            /* ================= IMU ================= */
 
             if (msg.msgid == MAVLINK_MSG_ID_RAW_IMU) {
 
                 mavlink_raw_imu_t imu;
                 mavlink_msg_raw_imu_decode(&msg, &imu);
 
-                comps.x = imu.xmag;
-                comps.y = imu.ymag;
-                comps.z = imu.zmag;
+                accel.x = (float)imu.xacc;
+                accel.y = (float)imu.yacc;
+                accel.z = (float)imu.zacc;
+
+                comps.x = (float)imu.xmag;
+                comps.y = (float)imu.ymag;
+                comps.z = (float)imu.zmag;
             }
         }
     }
 }
-
 
 static void send_arm_command(float arm_value)
 {
     int sock = socket(AF_INET, SOCK_DGRAM, 0);
 
     struct sockaddr_in dest;
+    memset(&dest, 0, sizeof(dest));
     dest.sin_family = AF_INET;
     dest.sin_port = htons(ACTUATOR_PORT);
     inet_pton(AF_INET, ACTUATOR_HOST, &dest.sin_addr);
@@ -125,7 +132,7 @@ static void send_arm_command(float arm_value)
         MAV_CMD_COMPONENT_ARM_DISARM,
         0,
         arm_value,
-        0,0,0,0,0,0
+        0, 0, 0, 0, 0, 0
     );
 
     uint16_t len = mavlink_msg_to_send_buffer(buffer, &msg);
@@ -137,9 +144,8 @@ static void send_arm_command(float arm_value)
     close(sock);
 }
 
-
-
 /* ================= PUBLIC FUNCTIONS ================= */
+
 void armDrone(void)
 {
     printf("ARM COMMAND SENT\n");
@@ -156,6 +162,12 @@ vector3 get_GYRO_V3(void)
 {
     update_mavlink();
     return gyro;
+}
+
+vector3 get_ACCEL_V3(void)
+{
+    update_mavlink();
+    return accel;
 }
 
 vector3 get_COMPS_V3(void)
