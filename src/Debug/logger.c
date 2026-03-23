@@ -2,7 +2,6 @@
 #include "config.h"
 
 #include <stdio.h>
-#include <stdbool.h>    
 #include <string.h>
 #include <time.h>
 #include <stdint.h>
@@ -46,28 +45,6 @@ static void logger_make_filename(char *buffer, size_t size)
              t->tm_sec);
 }
 
-static void logger_write_header(void)
-{
-    if (!logfile || header_written || current_column_count <= 0) {
-        return;
-    }
-
-    for (int i = 0; i < current_column_count; i++) {
-        fprintf(logfile, "%s", current_row[i].name);
-
-        if (i < current_column_count - 1) {
-            fputc(',', logfile);
-        }
-    }
-
-    fputc('\n', logfile);
-    header_written = 1;
-
-#if LOG_AUTO_FLUSH
-    fflush(logfile);
-#endif
-}
-
 static void logger_add_value(const char *name, const char *value)
 {
     if (current_column_count >= LOGGER_MAX_COLUMNS) {
@@ -89,6 +66,27 @@ static void logger_add_value(const char *name, const char *value)
              value);
 
     current_column_count++;
+}
+
+static void logger_write_header(void)
+{
+    if (!logfile || header_written || current_column_count <= 0) {
+        return;
+    }
+
+    for (int i = 0; i < current_column_count; i++) {
+        fprintf(logfile, "%s", current_row[i].name);
+        if (i < current_column_count - 1) {
+            fputc(',', logfile);
+        }
+    }
+
+    fputc('\n', logfile);
+    header_written = 1;
+
+#if LOG_AUTO_FLUSH
+    fflush(logfile);
+#endif
 }
 
 bool logger_is_ready(void)
@@ -166,6 +164,10 @@ void logger_end_row(void)
         return;
     }
 
+    if (!header_written) {
+        logger_write_header();
+    }
+
     const uint64_t now_us = logger_time_us();
     const uint64_t interval_us = 1000000ULL / LOG_RATE_HZ;
 
@@ -175,13 +177,8 @@ void logger_end_row(void)
 
     last_log_us = now_us;
 
-    if (!header_written) {
-        logger_write_header();
-    }
-
     for (int i = 0; i < current_column_count; i++) {
         fprintf(logfile, "%s", current_row[i].value);
-
         if (i < current_column_count - 1) {
             fputc(',', logfile);
         }

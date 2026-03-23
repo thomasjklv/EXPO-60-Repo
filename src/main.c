@@ -166,9 +166,9 @@ int main(void)
         printf("WARNING: DRONE WILL AUTO ARM IN 5s...\n");
         sleep(5);
         armDrone(); TOP_DRONE.ARMED = true; printf("DRONE ARMED\n");
-         logger_begin_row();
-         logger_add_string("ARMSTATUS","ARMED");
-         logger_end_row();
+         //logger_begin_row();
+         //logger_add_string("ARMSTATUS","ARMED");
+         //logger_end_row();
     }
     
     pthread_t t1, t2;
