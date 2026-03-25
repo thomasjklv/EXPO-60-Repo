@@ -59,8 +59,8 @@
 // Include Custom modules here Ex:"Your Module.h"
 /*=========== Custom Modules ===========*/
 #include "common_Control/actuators.h"
-#include "common_Control/control.h"
-#include "common_Control/vector3.h"
+#include "common_Control/telemetry.h"
+#include "common_Control/transform.h"
 #include "Debug/logger.h"
 
 // Define this script only Defines Ex: #define value true
@@ -156,10 +156,7 @@ void* thread_2_Control(void* arg)
 {
     while (1)
     { 
-        set_ServoAngle(&SERVO_TEST, SERVO_TEST.MIN_ANGLE);
-        sleep(1);
-        set_ServoAngle(&SERVO_TEST, SERVO_TEST.MAX_ANGLE); 
-        sleep(1);
+        
     }
     return NULL;
 }

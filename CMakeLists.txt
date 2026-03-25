@@ -9,6 +9,7 @@ add_executable(torpedo_main
     src/main.c
     src/common_Control/actuators.c
     src/common_Control/control.c
+    src/common_Control/telemetry.c
     src/Debug/logger.c
 )
 
