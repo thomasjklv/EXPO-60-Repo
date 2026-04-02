@@ -106,3 +106,46 @@ vector3 euler6D_rotation(euler6D t)
     vector3 v = { t.roll, t.pitch, t.yaw };
     return v;
 }
+
+
+/* =========================
+   bodyAttitude4D functions
+   ========================= */
+
+bodyAttitude4D bodyAttitude4D_create(float x, float y, float z, float r)
+{
+    bodyAttitude4D b = { x, y, z, r };
+    return b;
+}
+
+bodyAttitude4D bodyAttitude4D_zero(void)
+{
+    bodyAttitude4D b = { 0.0f, 0.0f, 0.0f, 0.0f };
+    return b;
+}
+
+float bodyAttitude4D_yaw(bodyAttitude4D b)
+{
+    return b.x;
+}
+
+float bodyAttitude4D_pitch(bodyAttitude4D b)
+{
+    return b.y;
+}
+
+float bodyAttitude4D_surge(bodyAttitude4D b)
+{
+    return b.z;
+}
+
+float bodyAttitude4D_roll(bodyAttitude4D b)
+{
+    return b.r;
+}
+
+vector3 bodyAttitude4D_as_vector3(bodyAttitude4D b)
+{
+    vector3 v = { b.x, b.y, b.z };
+    return v;
+}

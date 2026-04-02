@@ -26,6 +26,14 @@ typedef struct
     float yaw;
 } euler6D;
 
+typedef struct
+{
+    float x;   /* yaw   */
+    float y;   /* pitch */
+    float z;   /* surge */
+    float r;   /* roll  */
+} bodyAttitude4D;
+
 
 /* vector3 functions */
 vector3 vector3_create(float x, float y, float z);
@@ -51,5 +59,17 @@ euler6D euler6D_zero(void);
 
 vector3 euler6D_position(euler6D t);
 vector3 euler6D_rotation(euler6D t);
+
+
+/* bodyAttitude4D functions */
+bodyAttitude4D bodyAttitude4D_create(float x, float y, float z, float r);
+bodyAttitude4D bodyAttitude4D_zero(void);
+
+float bodyAttitude4D_yaw(bodyAttitude4D b);
+float bodyAttitude4D_pitch(bodyAttitude4D b);
+float bodyAttitude4D_surge(bodyAttitude4D b);
+float bodyAttitude4D_roll(bodyAttitude4D b);
+
+vector3 bodyAttitude4D_as_vector3(bodyAttitude4D b);
 
 #endif

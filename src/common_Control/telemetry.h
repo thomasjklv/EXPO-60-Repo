@@ -2,10 +2,11 @@
 #define TELEMETRY_H
 
 #include <stdbool.h>
-#include "vector3.h"
+#include "transform.h"
 
 typedef struct 
 {
+    bodyAttitude4D bodyAtti4D;
     bool ARMED;
     vector3 gyro_RAD;
     vector3 comps_RAD;

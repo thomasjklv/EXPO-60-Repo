@@ -34,8 +34,6 @@
 ===============================================================================
 */
 
-
-
 #pragma region Includes
 // Include all Lib includes here Ex:<stdio.h>
 /*============ Pi-Lib Files ============*/
@@ -61,6 +59,7 @@
 #include "common_Control/actuators.h"
 #include "common_Control/telemetry.h"
 #include "common_Control/transform.h"
+#include "common_Control/control.h"
 #include "Debug/logger.h"
 
 // Define this script only Defines Ex: #define value true
@@ -70,18 +69,15 @@
 /*=========== DRONE CONTROL ===========*/
 volatile drone_MAIN TOP_DRONE = {.ARMED = 0};
 
-
 #pragma region actuator list
 /*=============== SERVOS ==============*/
-extern srvSTR SERVO_TEST = {    
+extern srvSTR SERVO_TEST = {
     .MAX_ANGLE = 90,
     .MIN_ANGLE = 0,
     .DFLT_ANGLE = 45,
     .ANGLE = 90,
-    .CHANNEL = 8
-};
+    .CHANNEL = 8};
 #pragma endregion
-
 
 void EXIT_TASK(int sig)
 {
@@ -90,7 +86,6 @@ void EXIT_TASK(int sig)
     logger_close();
     exit(sig);
 }
-
 
 double get_time_s()
 {
@@ -102,7 +97,7 @@ double get_time_s()
 
 #pragma region Telemetry Thread
 // MAIN TELEMETRY THREAD: This Thread is made for reading and setting Telemetry Values
-void* thread_1_Telemetry(void* arg)
+void *thread_1_Telemetry(void *arg)
 {
     while (1)
     {
@@ -130,20 +125,19 @@ void* thread_1_Telemetry(void* arg)
         logger_set_float("Compass_Y", TOP_DRONE.comps_RAD.y);
         logger_set_float("Compass_Z", TOP_DRONE.comps_RAD.z);
 
-         logger_set_float("Accel_X", TOP_DRONE.accel_V3.x);
+        logger_set_float("Accel_X", TOP_DRONE.accel_V3.x);
         logger_set_float("Accel_Y", TOP_DRONE.accel_V3.y);
         logger_set_float("Accel_Z", TOP_DRONE.accel_V3.z);
         logger_end_row();
 
-
-        if (sPrintTelemetry){
-        printf("\rYaw:%6.2f deg  Pitch:%6.2f deg  |  Gyro X:%6.3f Y:%6.3f Z:%6.3f  |  Accel X:%6.2f  Accel Y:%6.2f  Accel Z:%6.2f",
-       get_YAW_HEADING(),
-       get_PITCH_HEADING(),
-       TOP_DRONE.gyro_RAD.x, TOP_DRONE.gyro_RAD.y, TOP_DRONE.gyro_RAD.z,
-       TOP_DRONE.accel_V3.x, TOP_DRONE.accel_V3.y, TOP_DRONE.accel_V3.z
-);
-        fflush(stdout);
+        if (sPrintTelemetry)
+        {
+            printf("\rYaw:%6.2f deg  Pitch:%6.2f deg  |  Gyro X:%6.3f Y:%6.3f Z:%6.3f  |  Accel X:%6.2f  Accel Y:%6.2f  Accel Z:%6.2f",
+                   get_YAW_HEADING(),
+                   get_PITCH_HEADING(),
+                   TOP_DRONE.gyro_RAD.x, TOP_DRONE.gyro_RAD.y, TOP_DRONE.gyro_RAD.z,
+                   TOP_DRONE.accel_V3.x, TOP_DRONE.accel_V3.y, TOP_DRONE.accel_V3.z);
+            fflush(stdout);
         }
     }
     return NULL;
@@ -152,11 +146,49 @@ void* thread_1_Telemetry(void* arg)
 
 #pragma region Control Thread
 // MAIN CONTROL THREAD: This Thread is made for controlling the drones actuators
-void* thread_2_Control(void* arg)
+void *thread_2_Control(void *arg)
+{
+    control_STATES State = IDLE;
+    while (1)
+    {
+        switch (State)
+        {
+        case IDLE:
+            /* TODO: In IDLE, the drone should wait for a target GPS signal with a direction and velocity,
+               as well as a launch signal. When received, it should perform the detachment process
+               and then transition to the ATTACK state. */// IDLE -> ATTACK
+            break;
+
+        case ATTACK:
+            /* TODO: In ATTACK, the drone should maintain a desired depth, keep its roll angle level,
+               and hold the correct heading toward the target. After a certain time or when an error
+               threshold is reached, it should resurface to check its GPS position and any target updates.
+               In ATTACK mode, the drone should also use the nose sensor to look for the target and if found go
+               towards it. 
+               */// ATTACK <-> RESURFACE
+            break;
+
+        case RESURFACE:
+            /* TODO: In RESURFACE, the drone should surface to verify that its GPS position and heading
+               are still on course. The drone may also receive updated information about its target. */
+            break;
+
+        default:
+            State = IDLE; // Force fallback to IDLE
+            break;
+        }
+    }
+    return NULL;
+}
+#pragma endregion
+
+#pragma region Sensor Thread
+// MAIN SENSOR THREAD: This Thread is made for using and proceccing the Sensors
+void *thread_3_Sensors(void *arg)
 {
     while (1)
-    { 
-        
+    {
+        // TODO: SensorHead code
     }
     return NULL;
 }
@@ -169,23 +201,35 @@ int main(void)
 
     signal(SIGINT, EXIT_TASK);
     disarmDrone();
-    if (AUTOARM) {
+    if (AUTOARM)
+    {
         printf("WARNING: DRONE WILL AUTO ARM IN 5s...\n");
         sleep(5);
-        armDrone(); TOP_DRONE.ARMED = true; printf("DRONE ARMED\n");
-         logger_begin_row();
-         logger_set_double("Tijd", get_time_s());
-         logger_set_string("ARMSTATUS","ARMED");
-         logger_end_row();
+        armDrone();
+        TOP_DRONE.ARMED = true;
+        printf("DRONE ARMED\n");
+        logger_begin_row();
+        logger_set_double("Tijd", get_time_s());
+        logger_set_string("ARMSTATUS", "ARMED");
+        logger_end_row();
     }
-    
-    pthread_t t1, t2;
+
+    while (!TOP_DRONE.ARMED)
+    {
+        // TODO: GetARM Signal Function met true/false return
+        // DroneARM() ? TOP_DRONE.ARMED  = true : TOP_DRONE.ARMED  = false;
+        usleep(100);
+    }
+
+    pthread_t t1, t2, t3;
 
     pthread_create(&t1, NULL, thread_1_Telemetry, NULL);
     pthread_create(&t2, NULL, thread_2_Control, NULL);
+    pthread_create(&t3 NULL, thread_3_Sensors, NULL);
 
     pthread_join(t1, NULL);
     pthread_join(t2, NULL);
+    pthread_join(t3, NULL);
     return 0;
 }
 #pragma endregion
