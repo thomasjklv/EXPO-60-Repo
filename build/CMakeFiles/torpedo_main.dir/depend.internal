@@ -10,6 +10,11 @@ CMakeFiles/torpedo_main.dir/src/common_Control/actuators.c.o
  ../src/config.h
  /home/pi/Torpedo_EX60/src/common_Control/actuators.c
 CMakeFiles/torpedo_main.dir/src/common_Control/control.c.o
+ /home/pi/Torpedo_EX60/src/common_Control/control.c
+ /home/pi/Torpedo_EX60/src/common_Control/control.h
+ /home/pi/Torpedo_EX60/src/common_Control/telemetry.h
+ /home/pi/Torpedo_EX60/src/common_Control/transform.h
+CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.o
  ../lib/c_library_v2/checksum.h
  ../lib/c_library_v2/common/common.h
  ../lib/c_library_v2/common/mavlink.h
@@ -256,10 +261,13 @@ CMakeFiles/torpedo_main.dir/src/common_Control/control.c.o
  ../lib/c_library_v2/standard/mavlink_msg_autopilot_version.h
  ../lib/c_library_v2/standard/mavlink_msg_global_position_int.h
  ../lib/c_library_v2/standard/standard.h
- ../src/common_Control/control.h
- ../src/common_Control/vector3.h
+ ../src/common_Control/telemetry.h
  ../src/config.h
- /home/pi/Torpedo_EX60/src/common_Control/control.c
+ /home/pi/Torpedo_EX60/src/common_Control/telemetry.c
+ /home/pi/Torpedo_EX60/src/common_Control/transform.h
+CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.o
+ /home/pi/Torpedo_EX60/src/common_Control/transform.c
+ /home/pi/Torpedo_EX60/src/common_Control/transform.h
 CMakeFiles/torpedo_main.dir/src/main.c.o
  ../lib/c_library_v2/checksum.h
  ../lib/c_library_v2/common/common.h
@@ -510,6 +518,7 @@ CMakeFiles/torpedo_main.dir/src/main.c.o
  /home/pi/Torpedo_EX60/src/Debug/logger.h
  /home/pi/Torpedo_EX60/src/common_Control/actuators.h
  /home/pi/Torpedo_EX60/src/common_Control/control.h
- /home/pi/Torpedo_EX60/src/common_Control/vector3.h
+ /home/pi/Torpedo_EX60/src/common_Control/telemetry.h
+ /home/pi/Torpedo_EX60/src/common_Control/transform.h
  /home/pi/Torpedo_EX60/src/config.h
  /home/pi/Torpedo_EX60/src/main.c

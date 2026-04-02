@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
-
+#include "transform.h"
 #include "common/mavlink.h"
 
 #define MAVLINK_PORT 14670
@@ -197,4 +197,22 @@ gpsSTR get_GPS(void)
 float rad_to_deg(float rad)
 {
     return rad * (180.0f / 3.14159265f);
+}
+
+float get_ROLL_HEADING(void)
+{
+    update_mavlink();
+    return rad_to_deg(roll_rad);
+}
+
+bodyAttitude4D get_BODY_ATTI4D(void)
+{
+    update_mavlink();
+
+    return bodyAttitude4D_create(
+        rad_to_deg(yaw_rad),    // x = yaw
+        rad_to_deg(pitch_rad),  // y = pitch
+        0.0f,                   // z = surge (nog geen bron in jouw code)
+        rad_to_deg(roll_rad)    // r = roll
+    );
 }

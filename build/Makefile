@@ -223,6 +223,60 @@ src/common_Control/control.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/torpedo_main.dir/build.make CMakeFiles/torpedo_main.dir/src/common_Control/control.c.s
 .PHONY : src/common_Control/control.c.s
 
+src/common_Control/telemetry.o: src/common_Control/telemetry.c.o
+
+.PHONY : src/common_Control/telemetry.o
+
+# target to build an object file
+src/common_Control/telemetry.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/torpedo_main.dir/build.make CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.o
+.PHONY : src/common_Control/telemetry.c.o
+
+src/common_Control/telemetry.i: src/common_Control/telemetry.c.i
+
+.PHONY : src/common_Control/telemetry.i
+
+# target to preprocess a source file
+src/common_Control/telemetry.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/torpedo_main.dir/build.make CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.i
+.PHONY : src/common_Control/telemetry.c.i
+
+src/common_Control/telemetry.s: src/common_Control/telemetry.c.s
+
+.PHONY : src/common_Control/telemetry.s
+
+# target to generate assembly for a file
+src/common_Control/telemetry.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/torpedo_main.dir/build.make CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.s
+.PHONY : src/common_Control/telemetry.c.s
+
+src/common_Control/transform.o: src/common_Control/transform.c.o
+
+.PHONY : src/common_Control/transform.o
+
+# target to build an object file
+src/common_Control/transform.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/torpedo_main.dir/build.make CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.o
+.PHONY : src/common_Control/transform.c.o
+
+src/common_Control/transform.i: src/common_Control/transform.c.i
+
+.PHONY : src/common_Control/transform.i
+
+# target to preprocess a source file
+src/common_Control/transform.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/torpedo_main.dir/build.make CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.i
+.PHONY : src/common_Control/transform.c.i
+
+src/common_Control/transform.s: src/common_Control/transform.c.s
+
+.PHONY : src/common_Control/transform.s
+
+# target to generate assembly for a file
+src/common_Control/transform.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/torpedo_main.dir/build.make CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.s
+.PHONY : src/common_Control/transform.c.s
+
 src/main.o: src/main.c.o
 
 .PHONY : src/main.o
@@ -268,6 +322,12 @@ help:
 	@echo "... src/common_Control/control.o"
 	@echo "... src/common_Control/control.i"
 	@echo "... src/common_Control/control.s"
+	@echo "... src/common_Control/telemetry.o"
+	@echo "... src/common_Control/telemetry.i"
+	@echo "... src/common_Control/telemetry.s"
+	@echo "... src/common_Control/transform.o"
+	@echo "... src/common_Control/transform.i"
+	@echo "... src/common_Control/transform.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -7,6 +7,8 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/pi/Torpedo_EX60/src/Debug/logger.c" "/home/pi/Torpedo_EX60/build/CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o"
   "/home/pi/Torpedo_EX60/src/common_Control/actuators.c" "/home/pi/Torpedo_EX60/build/CMakeFiles/torpedo_main.dir/src/common_Control/actuators.c.o"
   "/home/pi/Torpedo_EX60/src/common_Control/control.c" "/home/pi/Torpedo_EX60/build/CMakeFiles/torpedo_main.dir/src/common_Control/control.c.o"
+  "/home/pi/Torpedo_EX60/src/common_Control/telemetry.c" "/home/pi/Torpedo_EX60/build/CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.o"
+  "/home/pi/Torpedo_EX60/src/common_Control/transform.c" "/home/pi/Torpedo_EX60/build/CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.o"
   "/home/pi/Torpedo_EX60/src/main.c" "/home/pi/Torpedo_EX60/build/CMakeFiles/torpedo_main.dir/src/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

@@ -93,12 +93,12 @@ clean: CMakeFiles/torpedo_main.dir/clean
 CMakeFiles/torpedo_main.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/torpedo_main.dir/build.make CMakeFiles/torpedo_main.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/torpedo_main.dir/build.make CMakeFiles/torpedo_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/pi/Torpedo_EX60/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target torpedo_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/pi/Torpedo_EX60/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target torpedo_main"
 .PHONY : CMakeFiles/torpedo_main.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/torpedo_main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/Torpedo_EX60/build/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/Torpedo_EX60/build/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/torpedo_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/Torpedo_EX60/build/CMakeFiles 0
 .PHONY : CMakeFiles/torpedo_main.dir/rule

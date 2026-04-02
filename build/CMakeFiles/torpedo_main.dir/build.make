@@ -115,9 +115,35 @@ CMakeFiles/torpedo_main.dir/src/common_Control/control.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/torpedo_main.dir/src/common_Control/control.c.s"
 	/usr/bin/arm-linux-gnueabihf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/pi/Torpedo_EX60/src/common_Control/control.c -o CMakeFiles/torpedo_main.dir/src/common_Control/control.c.s
 
+CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.o: CMakeFiles/torpedo_main.dir/flags.make
+CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.o: ../src/common_Control/telemetry.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/Torpedo_EX60/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.o"
+	/usr/bin/arm-linux-gnueabihf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.o -c /home/pi/Torpedo_EX60/src/common_Control/telemetry.c
+
+CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.i"
+	/usr/bin/arm-linux-gnueabihf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/pi/Torpedo_EX60/src/common_Control/telemetry.c > CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.i
+
+CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.s"
+	/usr/bin/arm-linux-gnueabihf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/pi/Torpedo_EX60/src/common_Control/telemetry.c -o CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.s
+
+CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.o: CMakeFiles/torpedo_main.dir/flags.make
+CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.o: ../src/common_Control/transform.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/Torpedo_EX60/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.o"
+	/usr/bin/arm-linux-gnueabihf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.o -c /home/pi/Torpedo_EX60/src/common_Control/transform.c
+
+CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.i"
+	/usr/bin/arm-linux-gnueabihf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/pi/Torpedo_EX60/src/common_Control/transform.c > CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.i
+
+CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.s"
+	/usr/bin/arm-linux-gnueabihf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/pi/Torpedo_EX60/src/common_Control/transform.c -o CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.s
+
 CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o: CMakeFiles/torpedo_main.dir/flags.make
 CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o: ../src/Debug/logger.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/Torpedo_EX60/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/Torpedo_EX60/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o"
 	/usr/bin/arm-linux-gnueabihf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o -c /home/pi/Torpedo_EX60/src/Debug/logger.c
 
 CMakeFiles/torpedo_main.dir/src/Debug/logger.c.i: cmake_force
@@ -133,6 +159,8 @@ torpedo_main_OBJECTS = \
 "CMakeFiles/torpedo_main.dir/src/main.c.o" \
 "CMakeFiles/torpedo_main.dir/src/common_Control/actuators.c.o" \
 "CMakeFiles/torpedo_main.dir/src/common_Control/control.c.o" \
+"CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.o" \
+"CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.o" \
 "CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o"
 
 # External object files for target torpedo_main
@@ -141,10 +169,12 @@ torpedo_main_EXTERNAL_OBJECTS =
 torpedo_main: CMakeFiles/torpedo_main.dir/src/main.c.o
 torpedo_main: CMakeFiles/torpedo_main.dir/src/common_Control/actuators.c.o
 torpedo_main: CMakeFiles/torpedo_main.dir/src/common_Control/control.c.o
+torpedo_main: CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.o
+torpedo_main: CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.o
 torpedo_main: CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o
 torpedo_main: CMakeFiles/torpedo_main.dir/build.make
 torpedo_main: CMakeFiles/torpedo_main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/Torpedo_EX60/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable torpedo_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/Torpedo_EX60/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable torpedo_main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/torpedo_main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

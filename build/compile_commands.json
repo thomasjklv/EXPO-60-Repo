@@ -16,6 +16,16 @@
 },
 {
   "directory": "/home/pi/Torpedo_EX60/build",
+  "command": "/usr/bin/arm-linux-gnueabihf-gcc  -I/home/pi/Torpedo_EX60/lib/c_library_v2 -I/home/pi/Torpedo_EX60/src -g -Wall -Wextra -std=gnu11 -o CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.o -c /home/pi/Torpedo_EX60/src/common_Control/telemetry.c",
+  "file": "/home/pi/Torpedo_EX60/src/common_Control/telemetry.c"
+},
+{
+  "directory": "/home/pi/Torpedo_EX60/build",
+  "command": "/usr/bin/arm-linux-gnueabihf-gcc  -I/home/pi/Torpedo_EX60/lib/c_library_v2 -I/home/pi/Torpedo_EX60/src -g -Wall -Wextra -std=gnu11 -o CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.o -c /home/pi/Torpedo_EX60/src/common_Control/transform.c",
+  "file": "/home/pi/Torpedo_EX60/src/common_Control/transform.c"
+},
+{
+  "directory": "/home/pi/Torpedo_EX60/build",
   "command": "/usr/bin/arm-linux-gnueabihf-gcc  -I/home/pi/Torpedo_EX60/lib/c_library_v2 -I/home/pi/Torpedo_EX60/src -g -Wall -Wextra -std=gnu11 -o CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o -c /home/pi/Torpedo_EX60/src/Debug/logger.c",
   "file": "/home/pi/Torpedo_EX60/src/Debug/logger.c"
 }

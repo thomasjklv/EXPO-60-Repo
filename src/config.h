@@ -12,15 +12,17 @@
 
 
 
-/* ===== DRONE ===== */
+/* ===== DRONE COM ===== */
 #define LISTEN_PORT 14670
 #define AUTOARM 1
-#define sPrintTelemetry 1
+#define sPrintTelemetry 0
 
 #define ACTUATOR_HOST "127.0.0.1"
 #define ACTUATOR_PORT 14550
 /*==================*/
 
+/* ===== DRONE Controll ===== */
+#define ROLL_CONT_DEADZONE 5.0f
 
 
 #endif

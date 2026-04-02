@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/torpedo_main.dir/src/Debug/logger.c.o"
   "CMakeFiles/torpedo_main.dir/src/common_Control/actuators.c.o"
   "CMakeFiles/torpedo_main.dir/src/common_Control/control.c.o"
+  "CMakeFiles/torpedo_main.dir/src/common_Control/telemetry.c.o"
+  "CMakeFiles/torpedo_main.dir/src/common_Control/transform.c.o"
   "CMakeFiles/torpedo_main.dir/src/main.c.o"
   "torpedo_main"
   "torpedo_main.pdb"

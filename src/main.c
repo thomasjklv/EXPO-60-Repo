@@ -49,6 +49,7 @@
 #include <signal.h>
 #include <time.h>
 #include "common/mavlink.h"
+#include "math.h"
 
 // Include the config file here
 /*======== Config settings File ========*/
@@ -107,8 +108,8 @@ void *thread_1_Telemetry(void *arg)
         TOP_DRONE.compsYAW = get_YAW_HEADING();
         TOP_DRONE.compsPITCH = get_PITCH_HEADING();
         TOP_DRONE.accel_V3 = get_ACCEL_V3();
-
         TOP_DRONE.gps = get_GPS();
+        TOP_DRONE.ACTUALbodyAttitude4D = get_BODY_ATTI4D();
 
         double t = get_time_s();
 
@@ -148,9 +149,12 @@ void *thread_1_Telemetry(void *arg)
 // MAIN CONTROL THREAD: This Thread is made for controlling the drones actuators
 void *thread_2_Control(void *arg)
 {
-    control_STATES State = IDLE;
+    control_STATES State = ATTACK;
+    TOP_DRONE.DESIREDbodyAttitude4D = bodyAttitude4D_create(0.0f, 0.0f, 0.0f, 0.0f);
+    float roll_ERROR;
     while (1)
     {
+
         switch (State)
         {
         case IDLE:
@@ -160,14 +164,26 @@ void *thread_2_Control(void *arg)
             break;
 
         case ATTACK:
+        {
             /* TODO: In ATTACK, the drone should maintain a desired depth, keep its roll angle level,
                and hold the correct heading toward the target. After a certain time or when an error
                threshold is reached, it should resurface to check its GPS position and any target updates.
                In ATTACK mode, the drone should also use the nose sensor to look for the target and if found go
                towards it. 
                */// ATTACK <-> RESURFACE
-            break;
 
+
+            float roll_ERROR = TOP_DRONE.DESIREDbodyAttitude4D.r - TOP_DRONE.ACTUALbodyAttitude4D.r;
+            if (fabsf(roll_ERROR) >= ROLL_CONT_DEADZONE){
+                TOP_DRONE.bodyAtt4D.r = TOP_DRONE.DESIREDbodyAttitude4D.r - TOP_DRONE.ACTUALbodyAttitude4D.r;
+                printf("RollControll: %6.2f\n",TOP_DRONE.DESIREDbodyAttitude4D.r - TOP_DRONE.ACTUALbodyAttitude4D.r);
+            }
+
+          
+
+ 
+            break;
+        }
         case RESURFACE:
             /* TODO: In RESURFACE, the drone should surface to verify that its GPS position and heading
                are still on course. The drone may also receive updated information about its target. */
@@ -176,6 +192,10 @@ void *thread_2_Control(void *arg)
         default:
             State = IDLE; // Force fallback to IDLE
             break;
+
+            
+
+
         }
     }
     return NULL;
@@ -221,15 +241,15 @@ int main(void)
         usleep(100);
     }
 
-    pthread_t t1, t2, t3;
+    pthread_t t1, t2;
 
     pthread_create(&t1, NULL, thread_1_Telemetry, NULL);
     pthread_create(&t2, NULL, thread_2_Control, NULL);
-    pthread_create(&t3 NULL, thread_3_Sensors, NULL);
+   // pthread_create(&t3 NULL, thread_3_Sensors, NULL);
 
     pthread_join(t1, NULL);
     pthread_join(t2, NULL);
-    pthread_join(t3, NULL);
+    //pthread_join(t3, NULL);
     return 0;
 }
 #pragma endregion

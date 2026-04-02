@@ -35,47 +35,47 @@ vector3 vector3_scale(vector3 v, float s)
     return out;
 }
 
-float vector3_dot(vector3 a, vector3 b)
-{
-    return a.x * b.x + a.y * b.y + a.z * b.z;
-}
+// float vector3_dot(vector3 a, vector3 b)
+// {
+//     return a.x * b.x + a.y * b.y + a.z * b.z;
+// }
 
-vector3 vector3_cross(vector3 a, vector3 b)
-{
-    vector3 v = {
-        a.y * b.z - a.z * b.y,
-        a.z * b.x - a.x * b.z,
-        a.x * b.y - a.y * b.x
-    };
-    return v;
-}
+// vector3 vector3_cross(vector3 a, vector3 b)
+// {
+//     vector3 v = {
+//         a.y * b.z - a.z * b.y,
+//         a.z * b.x - a.x * b.z,
+//         a.x * b.y - a.y * b.x
+//     };
+//     return v;
+// }
 
-float vector3_length_squared(vector3 v)
-{
-    return vector3_dot(v, v);
-}
+// float vector3_length_squared(vector3 v)
+// {
+//     return vector3_dot(v, v);
+// }
 
-float vector3_length(vector3 v)
-{
-    return sqrtf(vector3_length_squared(v));
-}
+// float vector3_length(vector3 v)
+// {
+//     return sqrtf(vector3_length_squared(v));
+// }
 
-vector3 vector3_normalize(vector3 v)
-{
-    float len = vector3_length(v);
+// vector3 vector3_normalize(vector3 v)
+// {
+//     float len = vector3_length(v);
 
-    if (len > 1e-6f)
-    {
-        return vector3_scale(v, 1.0f / len);
-    }
+//     if (len > 1e-6f)
+//     {
+//         return vector3_scale(v, 1.0f / len);
+//     }
 
-    return vector3_zero();
-}
+//     return vector3_zero();
+// }
 
-float vector3_distance(vector3 a, vector3 b)
-{
-    return vector3_length(vector3_sub(a, b));
-}
+// float vector3_distance(vector3 a, vector3 b)
+// {
+//     return vector3_length(vector3_sub(a, b));
+// }
 
 
 /* =========================

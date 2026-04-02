@@ -1023,12 +1023,16 @@ stdint.h
 -
 
 /home/pi/Torpedo_EX60/src/common_Control/control.h
+telemetry.h
+/home/pi/Torpedo_EX60/src/common_Control/telemetry.h
+
+/home/pi/Torpedo_EX60/src/common_Control/telemetry.h
 stdbool.h
 -
-vector3.h
-/home/pi/Torpedo_EX60/src/common_Control/vector3.h
+transform.h
+/home/pi/Torpedo_EX60/src/common_Control/transform.h
 
-/home/pi/Torpedo_EX60/src/common_Control/vector3.h
+/home/pi/Torpedo_EX60/src/common_Control/transform.h
 
 /home/pi/Torpedo_EX60/src/config.h
 
@@ -1057,14 +1061,18 @@ time.h
 -
 common/mavlink.h
 /home/pi/Torpedo_EX60/src/common/mavlink.h
+math.h
+/home/pi/Torpedo_EX60/src/math.h
 config.h
 /home/pi/Torpedo_EX60/src/config.h
 common_Control/actuators.h
 /home/pi/Torpedo_EX60/src/common_Control/actuators.h
+common_Control/telemetry.h
+/home/pi/Torpedo_EX60/src/common_Control/telemetry.h
+common_Control/transform.h
+/home/pi/Torpedo_EX60/src/common_Control/transform.h
 common_Control/control.h
 /home/pi/Torpedo_EX60/src/common_Control/control.h
-common_Control/vector3.h
-/home/pi/Torpedo_EX60/src/common_Control/vector3.h
 Debug/logger.h
 /home/pi/Torpedo_EX60/src/Debug/logger.h
 
